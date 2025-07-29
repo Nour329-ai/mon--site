@@ -31,37 +31,6 @@
 
   </main>
 
-    <!-- Script JS -->
-  <script>
-    // Fonction pour le mode sombre
-    document.getElementById('themeToggle').addEventListener('click', function() {
-      document.body.classList.toggle('dark-mode');
-      
-      const icon = this.querySelector('.icon');
-      const text = this.querySelector('.text');
-      
-      if (document.body.classList.contains('dark-mode')) {
-        icon.textContent = '☀️';
-        text.textContent = 'Mode Clair';
-      } else {
-        icon.textContent = '🌙';
-        text.textContent = 'Mode Nuit';
-      }
-    });
-
-    // Fonction pour le menu actif
-    function setActive(element) {
-      // Retirer la classe active de tous les liens
-      document.querySelectorAll('.sidenav a').forEach(link => {
-        link.classList.remove('active');
-      });
-      
-      // Ajouter la classe active au lien cliqué
-      element.classList.add('active');
-    }
-  </script>
-
-
   <!-- Script JS -->
   <script src="app.js"></script>
 
