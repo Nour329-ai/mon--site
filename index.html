@@ -1,20 +1,70 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-	<meta charset="utf-8">
-	<title> Atelier HTML</title>
+  <meta charset="utf-8">
+  <title>Atelier HTML</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-<link rel="stylesheet"href="style.css">
 <body>
-<h1> mon premier dossier HTML<h1> 
-<p>mon paragraphe très cours parce que je sais pas quoi écrire.<p>
-<img src="image/FONDECRAN.jpg"/>
-<br>
-<p> venez vous détendre grace a cette video.</p>
-<iframe width="1047" height="589" src="https://www.youtube.com/embed/FxAf9gr0xjA" title="SÉANCE DE RELAXATION - calme et ressource" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-<div id="mySidenav" class="sidenav">
-  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-  <a href="#">video de relaxations </a>
-  <a href="#">Contact</a>
-</div>
+  <!-- Menu latéral -->
+  <nav class="sidenav">
+    <a href="index.html" class="active" onclick="setActive(this)">🏠 Accueil</a>
+    <a href="video.html" onclick="setActive(this)">🎥 Vidéo</a>
+    <a href="blog.html" onclick="setActive(this)">📝 Blog</a>
+  </nav>
+
+  <!-- Bouton Mode Nuit -->
+  <button class="theme-toggle" id="themeToggle" >
+    <span class="icon">🌙</span>
+    <span class="text">Mode Nuit</span>
+  </button>
+
+  <!-- Contenu principal -->
+  <main class="main">
+
+    <!-- Section Accueil -->
+    <section id="accueil">
+      <h1>Mon premier site HTML</h1>
+      <p>Bienvenue sur mon site de relaxation.</p>
+    </section>
+
+  </main>
+
+    <!-- Script JS -->
+  <script>
+    // Fonction pour le mode sombre
+    document.getElementById('themeToggle').addEventListener('click', function() {
+      document.body.classList.toggle('dark-mode');
+      
+      const icon = this.querySelector('.icon');
+      const text = this.querySelector('.text');
+      
+      if (document.body.classList.contains('dark-mode')) {
+        icon.textContent = '☀️';
+        text.textContent = 'Mode Clair';
+      } else {
+        icon.textContent = '🌙';
+        text.textContent = 'Mode Nuit';
+      }
+    });
+
+    // Fonction pour le menu actif
+    function setActive(element) {
+      // Retirer la classe active de tous les liens
+      document.querySelectorAll('.sidenav a').forEach(link => {
+        link.classList.remove('active');
+      });
+      
+      // Ajouter la classe active au lien cliqué
+      element.classList.add('active');
+    }
+  </script>
+
+
+  <!-- Script JS -->
+  <script src="app.js"></script>
+
+
+</body>
+</html>

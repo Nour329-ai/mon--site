@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>Atelier HTML</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Menu latéral -->
+  <nav class="sidenav">
+    <a href="index.html" class="active" onclick="setActive(this)">🏠 Accueil</a>
+    <a href="video.html" onclick="setActive(this)">🎥 Vidéo</a>
+    <a href="blog.html" onclick="setActive(this)">📝 Blog</a>
+  </nav>
+
+   <!-- Bouton Mode Nuit -->
+  <button class="theme-toggle" id="themeToggle" type="button" >
+    <span class="icon">🌙</span>
+    <span class="text">Mode Nuit</span>
+  </button>
+
+
+<!-- Section Vidéo -->
+    <section id="video">
+      <h2>Venez vous détendre grâce à cette vidéo</h2>
+      <iframe width="800" height="450"
+              src="https://www.youtube.com/embed/FxAf9gr0xjA"
+              title="SÉANCE DE RELAXATION - calme et ressource"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen>
+      </iframe>
+    </section>
+
+      <!-- Script JS -->
+  <script>
+    // Fonction pour le mode sombre
+    document.getElementById('themeToggle').addEventListener('click', function() {
+      document.body.classList.toggle('dark-mode');
+      
+      const icon = this.querySelector('.icon');
+      const text = this.querySelector('.text');
+      
+      if (document.body.classList.contains('dark-mode')) {
+        icon.textContent = '☀️';
+        text.textContent = 'Mode Clair';
+      } else {
+        icon.textContent = '🌙';
+        text.textContent = 'Mode Nuit';
+      }
+    });
+
+    // Fonction pour le menu actif
+    function setActive(element) {
+      // Retirer la classe active de tous les liens
+      document.querySelectorAll('.sidenav a').forEach(link => {
+        link.classList.remove('active');
+      });
+      
+      // Ajouter la classe active au lien cliqué
+      element.classList.add('active');
+    }
+  </script>
+
+ <!-- Script JS -->
+  <script src="app.js"></script>
+</body>   
+

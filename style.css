@@ -1,26 +1,203 @@
-h1{color: #D2C1B6;font-size:300%;font size;}
-p{color:#456882;}
-body{background:#F9F3EF; text-align: center;}
-p{color: #456882}
-{
-  padding: 6px 8px 6px 16px;
-  text-decoration: none;
-  font-size: 25px;
-  color: #818181;
+/* ===============================
+   VARIABLES (mode clair par défaut)
+   =============================== */
+:root {
+  --bg-color: #F9F3EF;
+  --title-color: #D2C1B6;
+  --text-color: #456882;
+  --nav-bg-color: #2c3e50;
+  --nav-link-color: #818181;
+  --nav-link-hover: #f1f1f1;
+  --nav-link-active: #D2C1B6;
+  --button-bg: #456882;
+  --button-text: #ffffff;
+  --border-color: #ddd;
+}
+
+/* ===============================
+   VARIABLES EN MODE SOMBRE
+   =============================== */
+body.dark-mode {
+  --bg-color: #1a1a1a;
+  --title-color: #E8D7CC;
+  --text-color: #A8C5E0;
+  --nav-bg-color: #0f1419;
+  --nav-link-color: #B0B0B0;
+  --nav-link-hover: #ffffff;
+  --nav-link-active: #E8D7CC;
+  --button-bg: #2D3748;
+  --button-text: #ffffff;
+  --border-color: #444;
+}
+
+/* ===============================
+   BASE
+   =============================== */
+body {
+  background: var(--bg-color);
+  color: var(--text-color);
+  font-family: Arial, sans-serif;
+  margin: 0;
+  text-align: center;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+h1 {
+  color: var(--title-color);
+  font-size: 300%;
+  transition: color 0.3s ease;
+}
+
+p {
+  color: var(--text-color);
+  transition: color 0.3s ease;
+}
+
+/* ===============================
+   MENU LATÉRAL (SIDENAV)
+   =============================== */
+.sidenav {
+  height: 100%;
+  width: 160px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: var(--nav-bg-color);
+  overflow-x: hidden;
+  padding-top: 20px;
+  z-index: 1;
+  transition: background-color 0.3s ease;
+}
+
+.sidenav a {
   display: block;
+  padding: 15px 8px 15px 16px;
+  text-decoration: none;
+  font-size: 20px;
+  color: var(--nav-link-color);
+  border-left: 3px solid transparent;
+  transition: all 0.3s ease;
 }
 
 .sidenav a:hover {
-  color: #f1f1f1;
+  color: var(--nav-link-hover);
+  background-color: rgba(255, 255, 255, 0.1);
+  border-left: 3px solid var(--nav-link-active);
+  padding-left: 20px;
 }
 
+.sidenav a.active {
+  color: var(--nav-link-active);
+  background-color: rgba(255, 255, 255, 0.15);
+  border-left: 3px solid var(--nav-link-active);
+  font-weight: bold;
+}
+
+/* Icônes pour les liens */
+.sidenav a::before {
+  margin-right: 10px;
+  font-size: 18px;
+}
+
+.sidenav a[href="#accueil"]::before {
+  content: "🏠";
+}
+
+.sidenav a[href="#blog"]::before {
+  content: "📝";
+}
+
+.sidenav a[href="#video"]::before {
+  content: "🎥";
+}
+
+/* ===============================
+   CONTENU PRINCIPAL
+   =============================== */
 .main {
-  margin-left: 160px; /* Same as the width of the sidenav */
-  font-size: 28px; /* Increased text to enable scrolling */
-  padding: 0px 10px;
+  margin-left: 160px;
+  font-size: 28px;
+  padding: 20px;
+  min-height: 100vh;
+}
+
+/* ===============================
+   BOUTON MODE NUIT
+   =============================== */
+.theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  border: none;
+  border-radius: 25px;
+  padding: 12px 20px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.theme-toggle .icon {
+  margin-right: 5px;
+  transition: transform 0.3s ease;
+}
+
+.dark-mode .theme-toggle .icon {
+  transform: rotate(180deg);
+}
+
+.dark-mode .theme-toggle {
+  box-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode .theme-toggle:hover {
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+}
+
+/* ===============================
+   RESPONSIVE DESIGN
+   =============================== */
+@media screen and (max-width: 768px) {
+  .sidenav {
+    width: 100%;
+    height: auto;
+    position: relative;
+    padding-top: 10px;
+  }
+
+  .sidenav a {
+    float: left;
+    text-align: center;
+    font-size: 16px;
+    padding: 15px;
+  }
+
+  .main {
+    margin-left: 0;
+    padding: 10px;
+  }
 }
 
 @media screen and (max-height: 450px) {
-  .sidenav {padding-top: 15px;}
-  .sidenav a {font-size: 18px;}
+  .sidenav {
+    padding-top: 15px;
+  }
+
+  .sidenav a {
+    font-size: 18px;
+  }
+}
+/* Exemple simple */
+.night-mode {
+  background-color: #121212;
+  color: #ffffff;
 }

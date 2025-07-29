@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>Atelier HTML</title>
+  <style>
+        /* ===============================
+           VARIABLES (mode clair par défaut)
+           =============================== */
+        :root {
+          --bg-color: #F9F3EF;
+          --title-color: #D2C1B6;
+          --text-color: #456882;
+          --nav-bg-color: #2c3e50;
+          --nav-link-color: #818181;
+          --nav-link-hover: #f1f1f1;
+          --nav-link-active: #D2C1B6;
+          --button-bg: #456882;
+          --button-text: #ffffff;
+          --border-color: #ddd;
+          --flex-bg: linear-gradient(135deg, #456882 0%, #D2C1B6 100%);
+          --card-bg: #ffffff;
+          --card-shadow: rgba(0, 0, 0, 0.1);
+        }
+
+        /* ===============================
+           VARIABLES EN MODE SOMBRE
+           =============================== */
+        body.dark-mode {
+          --bg-color: #1a1a1a;
+          --title-color: #E8D7CC;
+          --text-color: #A8C5E0;
+          --nav-bg-color: #0f1419;
+          --nav-link-color: #B0B0B0;
+          --nav-link-hover: #ffffff;
+          --nav-link-active: #E8D7CC;
+          --button-bg: #2D3748;
+          --button-text: #ffffff;
+          --border-color: #444;
+          --flex-bg: linear-gradient(135deg, #2D3748 0%, #1a1a1a 100%);
+          --card-bg: #2a2a2a;
+          --card-shadow: rgba(255, 255, 255, 0.1);
+        }
+
+        /* ===============================
+           BASE
+           =============================== */
+        body {
+          background: var(--bg-color);
+          color: var(--text-color);
+          font-family: Arial, sans-serif;
+          margin: 0;
+          transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* ===============================
+           MENU LATÉRAL (SIDENAV)
+           =============================== */
+        .sidenav {
+          height: 100%;
+          width: 160px;
+          position: fixed;
+          top: 0;
+          left: 0;
+          background-color: var(--nav-bg-color);
+          overflow-x: hidden;
+          padding-top: 20px;
+          z-index: 1;
+          transition: background-color 0.3s ease;
+        }
+
+        .sidenav a {
+          display: block;
+          padding: 15px 8px 15px 16px;
+          text-decoration: none;
+          font-size: 20px;
+          color: var(--nav-link-color);
+          border-left: 3px solid transparent;
+          transition: all 0.3s ease;
+        }
+
+        .sidenav a:hover {
+          color: var(--nav-link-hover);
+          background-color: rgba(255, 255, 255, 0.1);
+          border-left: 3px solid var(--nav-link-active);
+          padding-left: 20px;
+        }
+
+        .sidenav a.active {
+          color: var(--nav-link-active);
+          background-color: rgba(255, 255, 255, 0.15);
+          border-left: 3px solid var(--nav-link-active);
+          font-weight: bold;
+        }
+
+        /* ===============================
+           BOUTON MODE NUIT
+           =============================== */
+        .theme-toggle {
+          position: fixed;
+          top: 20px;
+          right: 20px;
+          background-color: var(--button-bg);
+          color: var(--button-text);
+          border: none;
+          border-radius: 25px;
+          padding: 12px 20px;
+          cursor: pointer;
+          font-size: 14px;
+          font-weight: bold;
+          z-index: 1000;
+          box-shadow: 0 2px 10px var(--card-shadow);
+          transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 4px 15px var(--card-shadow);
+        }
+
+        .theme-toggle .icon {
+          margin-right: 5px;
+          transition: transform 0.3s ease;
+        }
+
+        body.dark-mode .theme-toggle .icon {
+          transform: rotate(180deg);
+        }
+
+        /* ===============================
+           SECTION BLOG
+           =============================== */
+        #blog {
+          margin-left: 160px;
+          padding: 40px 20px;
+          background: var(--bg-color);
+          text-align: center;
+          transition: background-color 0.3s ease;
+        }
+
+        #blog h1 {
+          color: var(--title-color);
+          font-size: 3em;
+          margin-bottom: 10px;
+          transition: color 0.3s ease;
+        }
+
+        #blog h2 {
+          color: var(--button-bg);
+          font-size: 1.8em;
+          margin-bottom: 20px;
+          font-weight: 600;
+          transition: color 0.3s ease;
+        }
+
+        #blog p {
+          color: var(--text-color);
+          line-height: 1.6;
+          font-size: 1.2em;
+          max-width: 800px;
+          margin: 0 auto;
+          transition: color 0.3s ease;
+        }
+
+        /* ===============================
+           FLEXBOX CONTAINER
+           =============================== */
+        .flex-container {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          min-height: 60vh;
+          background: var(--flex-bg);
+          margin-left: 160px;
+          padding: 40px 20px;
+          box-sizing: border-box;
+          transition: background 0.3s ease;
+        }
+
+        .text-content {
+          background: var(--card-bg);
+          padding: 50px;
+          border-radius: 20px;
+          box-shadow: 0 15px 40px var(--card-shadow);
+          max-width: 700px;
+          text-align: center;
+          transition: all 0.3s ease;
+        }
+
+        .text-content h3 {
+          color: var(--title-color);
+          margin-bottom: 20px;
+          font-size: 2.2em;
+          transition: color 0.3s ease;
+        }
+
+        .text-content p {
+          color: var(--text-color);
+          line-height: 1.6;
+          font-size: 1.1em;
+          margin-bottom: 30px;
+          transition: color 0.3s ease;
+        }
+
+        .flex-row {
+          display: flex;
+          gap: 25px;
+          margin-top: 30px;
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+
+        .flex-item {
+          background: var(--bg-color);
+          padding: 25px;
+          border-radius: 12px;
+          border-left: 4px solid var(--button-bg);
+          flex: 1;
+          min-width: 220px;
+          transition: all 0.3s ease;
+        }
+
+        .flex-item:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 10px 25px var(--card-shadow);
+        }
+
+        .flex-item h4 {
+          margin-top: 0;
+          color: var(--title-color);
+          font-size: 1.3em;
+          margin-bottom: 10px;
+          transition: color 0.3s ease;
+        }
+
+        .flex-item p {
+          color: var(--text-color);
+          margin: 0;
+          font-size: 1em;
+          transition: color 0.3s ease;
+        }
+
+        /* ===============================
+           RESPONSIVE DESIGN
+           =============================== */
+        @media screen and (max-width: 768px) {
+          .sidenav {
+            width: 100%;
+            height: auto;
+            position: relative;
+            padding-top: 10px;
+          }
+
+          .sidenav a {
+            float: left;
+            text-align: center;
+            font-size: 16px;
+            padding: 15px;
+            border-left: none;
+            border-bottom: 3px solid transparent;
+          }
+
+          .sidenav a:hover,
+          .sidenav a.active {
+            border-left: none;
+            border-bottom: 3px solid var(--nav-link-active);
+          }
+
+          #blog,
+          .flex-container {
+            margin-left: 0;
+          }
+
+          .text-content {
+            padding: 30px 20px;
+          }
+
+          .flex-row {
+            flex-direction: column;
+          }
+        }
+
+        @media screen and (max-height: 450px) {
+          .sidenav {
+            padding-top: 15px;
+          }
+
+          .sidenav a {
+            font-size: 18px;
+          }
+        }
+    </style>
+</head>
+<body>
+  <!-- Menu latéral -->
+  <nav class="sidenav">
+    <a href="index.html" class="active" onclick="setActive(this)">🏠 Accueil</a>
+    <a href="video.html" onclick="setActive(this)">🎥 Vidéo</a>
+    <a href="blog.html" onclick="setActive(this)">📝 Blog</a>
+  </nav>
+  
+  <!-- Bouton Mode Nuit -->
+  <button class="theme-toggle" id="themeToggle" type="button">
+    <span class="icon">🌙</span>
+    <span class="text">Mode Nuit</span>
+  </button>
+
+  <!-- Section Blog -->
+  <section id="blog">
+    <h1>Les bienfaits de la relaxation</h1>
+    <h2>Section Blog</h2>
+    <p>
+      La relaxation est essentielle pour notre bien-être mental et physique. 
+      Elle permet de réduire le stress, améliorer le sommeil, renforcer la concentration 
+      et retrouver un équilibre intérieur. Prendre quelques minutes par jour pour se détendre 
+      peut faire une grande différence dans notre quotidien.
+    </p>
+  </section>
+
+  <!-- Flexbox pour le contenu centré -->
+  <div class="flex-container">
+    <div class="text-content">
+      <h3>Techniques de relaxation</h3>
+      <p>Découvrez différentes méthodes pour vous détendre et améliorer votre qualité de vie.</p>
+      
+      <div class="flex-row">
+        <div class="flex-item">
+          <h4>Méditation</h4>
+          <p>Pratiquez la pleine conscience pour apaiser votre esprit et réduire le stress quotidien.</p>
+        </div>
+        <div class="flex-item">
+          <h4>Respiration</h4>
+          <p>Apprenez des techniques de respiration profonde pour vous relaxer instantanément.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Script JS -->
+  <script>
+    // Fonction pour le mode sombre
+    document.getElementById('themeToggle').addEventListener('click', function() {
+      document.body.classList.toggle('dark-mode');
+      
+      const icon = this.querySelector('.icon');
+      const text = this.querySelector('.text');
+      
+      if (document.body.classList.contains('dark-mode')) {
+        icon.textContent = '☀️';
+        text.textContent = 'Mode Clair';
+      } else {
+        icon.textContent = '🌙';
+        text.textContent = 'Mode Nuit';
+      }
+    });
+
+    // Fonction pour le menu actif
+    function setActive(element) {
+      // Retirer la classe active de tous les liens
+      document.querySelectorAll('.sidenav a').forEach(link => {
+        link.classList.remove('active');
+      });
+      
+      // Ajouter la classe active au lien cliqué
+      element.classList.add('active');
+    }
+  </script>
+
+
+</body>
+</html>
